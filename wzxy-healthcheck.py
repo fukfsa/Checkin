@@ -162,7 +162,7 @@ class WoZaiXiaoYuanPuncher:
             content = json.dumps({
                 "打卡项目": "健康打卡",
                 "打卡情况": notifyResult,
-                "账号": username,
+                "账号": str(os.environ['WZXY_USERNAME']),
                 "打卡时间": notifyTime
             }, ensure_ascii=False)
             msg = {
