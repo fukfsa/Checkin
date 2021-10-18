@@ -86,7 +86,6 @@ class WoZaiXiaoYuanPuncher:
         self.header['Host'] = "student.wozaixiaoyuan.com"
         self.header['Content-Type'] = "application/x-www-form-urlencoded"
         self.header['JWSESSION'] = self.getJwsession()
-        print(username)
         sign_data = {
             "answers": '["0","1","36.5","无"]',
             "areacode":"610902",
@@ -164,6 +163,7 @@ class WoZaiXiaoYuanPuncher:
             content = json.dumps({
                 "打卡项目": "健康打卡",
                 "打卡情况": notifyResult,
+                "账号": username,
                 "打卡时间": notifyTime
             }, ensure_ascii=False)
             msg = {
