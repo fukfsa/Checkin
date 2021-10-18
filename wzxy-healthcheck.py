@@ -86,6 +86,7 @@ class WoZaiXiaoYuanPuncher:
         self.header['Host'] = "student.wozaixiaoyuan.com"
         self.header['Content-Type'] = "application/x-www-form-urlencoded"
         self.header['JWSESSION'] = self.getJwsession()
+        print(username)
         sign_data = {
             "answers": '["0","1","36.5","无"]',
             "areacode":"610902",
