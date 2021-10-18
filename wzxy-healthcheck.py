@@ -88,7 +88,6 @@ class WoZaiXiaoYuanPuncher:
         self.header['JWSESSION'] = self.getJwsession()
         sign_data = {
             "answers": '["0","1","36.5","无"]',
-            "areacode":"610902",
             "latitude": os.environ['WZXY_LATITUDE'],
             "longitude": os.environ['WZXY_LONGITUDE'],
             "country": os.environ['WZXY_COUNTRY'],
