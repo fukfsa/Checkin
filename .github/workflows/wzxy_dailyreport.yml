@@ -10,9 +10,9 @@ on:
     - cron:  '0 4,22 * * *' # 默认在每天 UTC 6 和 12 （北京时间 20:30 和 7:30）执行
 
 jobs:
-  USER_06:    ## Jobs名，注意修改序号
+  USER_04:    ## Jobs名，注意修改序号
     runs-on: ubuntu-latest
-    environment: WZXY_CONFIG_06          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
+    environment: WZXY_CONFIG_04          ## 填写需要使用的用户配置对应的环境,请自行根据实际情况修改
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
