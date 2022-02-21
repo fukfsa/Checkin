@@ -250,3 +250,4 @@ jobs:
         WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
         WZXY_STREET: ${{secrets.STREET}}
       run: python wzxy-healthcheck.py
+
