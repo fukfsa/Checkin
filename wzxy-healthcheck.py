@@ -82,9 +82,9 @@ class WoZaiXiaoYuanPuncher:
     # 执行打卡
     def doPunchIn(self):
         print("正在打卡...")
-	sign_time = int(round(time.time() * 1000)) #获取时间戳
-	signature = hashlib.sha256(content.encode('utf-8')).hexdigest()   #获取签名头
+	sign_time = int(round(time.time() * 1000)) #13位
 	content = f"陕西省_{t}_安康市"
+	signature = hashlib.sha256(content.encode('utf-8')).hexdigest()
         url = "https://student.wozaixiaoyuan.com/health/save.json"
         self.header['Host'] = "student.wozaixiaoyuan.com"
         self.header['Content-Type'] = "application/x-www-form-urlencoded"
