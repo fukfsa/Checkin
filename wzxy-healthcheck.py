@@ -103,8 +103,6 @@ class WoZaiXiaoYuanPuncher:
             "timestampHeader": sign_time,  # 20220417新增，时间戳（13位）
             "signatureHeader": signature  # 20220417新增，SHA256
         }
-        print(timestampHeader)
-        print(signatureHeader)
         data = urlencode(sign_data)
         self.session = requests.session()
         response = self.session.post(url=url, data=data, headers=self.header)
