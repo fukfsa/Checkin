@@ -148,7 +148,7 @@ class WoZaiXiaoYuanPuncher:
             "street": os.environ['WZXY_STREET'],
             "timestampHeader": sign_time,  # 20220417新增，时间戳（13位）
             "signatureHeader": signature  # 20220417新增，SHA256
-            "citycode" os.environ['WZXY_CITYCODE'],
+            "citycode": os.environ['WZXY_CITYCODE'],
             "myArea": "",
             "areacode": "",
             "userId": ""
