@@ -130,8 +130,9 @@ class WoZaiXiaoYuanPuncher:
         self.header['Host'] = "student.wozaixiaoyuan.com"
         self.header['Content-Type'] = "application/x-www-form-urlencoded"
         self.header['JWSESSION'] = self.getJwsession()      
-        sign_time = int(round(time.time() * 1000)) #获取时间戳
-        signature = hashlib.sha256(content.encode('utf-8')).hexdigest()   #获取签名头    
+        sign_time = int(round(time.time() * 1000)) #13位
+        content = f"os.environ['WZXY_PROVINCE']{time}os.environ['WZXY_CITY']"
+        signature = hashlib.sha256(content.encode('utf-8')).hexdigest()   
         sign_data = {
             "answers": '["0"]',
             "seq": str(seq),
