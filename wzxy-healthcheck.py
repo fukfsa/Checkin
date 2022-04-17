@@ -87,7 +87,7 @@ class WoZaiXiaoYuanPuncher:
         self.header['Content-Type'] = "application/x-www-form-urlencoded"
         self.header['JWSESSION'] = self.getJwsession()
         sign_time = int(round(time.time() * 1000)) #13位
-        content = f"陕西省_{t}_安康市"
+        content = f"陕西省_{time}_安康市"
         signature = hashlib.sha256(content.encode('utf-8')).hexdigest()
         sign_data = {
             "answers": '["0","1","36.5","无"]',
