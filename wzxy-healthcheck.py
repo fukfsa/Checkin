@@ -124,6 +124,7 @@ class WoZaiXiaoYuanPuncher:
             print("打卡成功")
         elif response['code'] == 1:
             print(response)
+            print(time)
             print("打卡失败：今日健康打卡已结束")
             self.status_code = 3
         else:
