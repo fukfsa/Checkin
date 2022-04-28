@@ -49,6 +49,7 @@ jobs:
         WZXY_PROVINCE: ${{secrets.PROVINCE}}
         WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
         WZXY_STREET: ${{secrets.STREET}}
+        WZXY_CITYCODE: ${{secrets.CITYCODE}}
       run: python wzxy-healthcheck.py
   USER_02:
     runs-on: ubuntu-latest
@@ -89,6 +90,7 @@ jobs:
         WZXY_PROVINCE: ${{secrets.PROVINCE}}
         WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
         WZXY_STREET: ${{secrets.STREET}}
+        WZXY_CITYCODE: ${{secrets.CITYCODE}}
       run: python wzxy-healthcheck.py
   USER_03:
     runs-on: ubuntu-latest
@@ -129,6 +131,7 @@ jobs:
         WZXY_PROVINCE: ${{secrets.PROVINCE}}
         WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
         WZXY_STREET: ${{secrets.STREET}}
+        WZXY_CITYCODE: ${{secrets.CITYCODE}}
       run: python wzxy-healthcheck.py
   USER_04:
     runs-on: ubuntu-latest
@@ -210,6 +213,7 @@ jobs:
         WZXY_PROVINCE: ${{secrets.PROVINCE}}
         WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
         WZXY_STREET: ${{secrets.STREET}}
+        WZXY_CITYCODE: ${{secrets.CITYCODE}}
       run: python wzxy-healthcheck.py
   USER_06:
     runs-on: ubuntu-latest
@@ -250,5 +254,6 @@ jobs:
         WZXY_PROVINCE: ${{secrets.PROVINCE}}
         WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
         WZXY_STREET: ${{secrets.STREET}}
+        WZXY_CITYCODE: ${{secrets.CITYCODE}}
       run: python wzxy-healthcheck.py
 
