@@ -172,7 +172,9 @@ jobs:
         WZXY_PROVINCE: ${{secrets.PROVINCE}}
         WZXY_TOWNSHIP: ${{secrets.TOWNSHIP}}
         WZXY_STREET: ${{secrets.STREET}}
-        WZXY_CITYCODE: ${{secrets.CITYCODE}}
+        WZXY_AREACODE: ${{secrets.AREACODE}} 
+        WZXY_TOWNCODE: ${{secrets.TOWNCODE}} 
+        WZXY_CITYCODE: ${{secrets.CITYCODE}} 
       run: python wzxy-healthcheck.py
 #   USER_05:
 #     runs-on: ubuntu-latest
