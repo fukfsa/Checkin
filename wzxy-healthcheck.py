@@ -99,6 +99,7 @@ class WoZaiXiaoYuanPuncher:
             "province": os.environ['WZXY_PROVINCE'],
             "township": os.environ['WZXY_TOWNSHIP'],
             "street": os.environ['WZXY_STREET'],
+            "areacode" : os.environ['WZXY_AREACODE'],
             "citycode": os.environ['WZXY_CITYCODE'],
             "timestampHeader": sign_time,  # 20220417新增，时间戳（13位）
             "signatureHeader": signature  # 20220417新增，SHA256
