@@ -78,42 +78,65 @@ class WoZaiXiaoYuanPuncher:
             data = utils.processJson(".cache/cache.json").read()
             self.jwsession = data['jwsession']
         return self.jwsession
+        
+    # 判断之前是否保存过地址信息
+    def hasAddress(self):
+        if self.obj.get('hasAddress') == False or self.obj.get('hasAddress') is None:
+            return False
+        else:
+            return True
+            
+        # 请求地址信息
+    def requestAddress(self, location):
+        # 根据经纬度求具体地址
+        url1 = 'https://restapi.amap.com/v3/geocode/regeo'
+        res = utils.geoCode(url1, {
+            "location": os.environ["WZXY_LOCATION"]
+        })
+        _res = res['regeocode']['addressComponent']
+        location = location.split(',')
+        sign_data = {
+            "answers": '["0","1","36.5","无"]',
+            "latitude": location[1],
+            "longitude": location[0],
+            "country": '中国',
+            "city": _res['city'],
+            "district": _res['district'],
+            "province": _res['province'],
+            "township": _res['township'],
+            "street": _res['streetNumber']['street'],
+            "citycode": os.environ['WZXY_CITYCODE'],
+            "towncode": os.environ['WZXY_TOWNCODE'],
+            //"towncode": "0",
+            //"citycode": "0",暂时保留，待代码完善后补充
+            "areacode": _res['adcode'],
+            "timestampHeader":int(round(time.time() * 1000)),
+            "signatureHeader": hashlib.sha256(
+                f"{_res['province']}_{int(round(time.time() * 1000))}_{_res['city']}".encode(
+                    "utf-8"
+                )
+            ).hexdigest(),
+        }
+        return sign_data
 
-    # 执行打卡
+   # 执行打卡
     def doPunchIn(self):
         print("正在打卡...")
         url = "https://student.wozaixiaoyuan.com/health/save.json"
-        self.header['Host'] = "student.wozaixiaoyuan.com"
-        self.header['Content-Type'] = "application/x-www-form-urlencoded"
-        self.header['JWSESSION'] = self.getJwsession()
-        sign_time = int(round(time.time() * 1000)) #13位
-        content = f"os.environ['WZXY_PROVINCE']{sign_time}os.environ['WZXY_CITY']"
-        signature = hashlib.sha256(content.encode('utf-8')).hexdigest()
-        sign_data = {
-            "answers": '["0","1","36.5","无"]',
-            "latitude": os.environ['WZXY_LATITUDE'],
-            "longitude": os.environ['WZXY_LONGITUDE'],
-            "country": os.environ['WZXY_COUNTRY'],
-            "city": os.environ['WZXY_CITY'],
-            "district": os.environ['WZXY_DISTRICT'],
-            "province": os.environ['WZXY_PROVINCE'],
-            "township": os.environ['WZXY_TOWNSHIP'],
-            "street": os.environ['WZXY_STREET'],
-            "areacode": os.environ['WZXY_AREACODE'],
-            "towncode": os.environ['WZXY_TOWNCODE'],
-            "citycode": os.environ['WZXY_CITYCODE'],
-            "timestampHeader": sign_time,  # 20220417新增，时间戳（13位）
-            "signatureHeader": signature  # 20220417新增，SHA256
-        }
+        self.header["Host"] = "student.wozaixiaoyuan.com"
+        self.header["Content-Type"] = "application/x-www-form-urlencoded"
+        self.header["JWSESSION"] = self.getJwsession()
+        sign_data = self.requestAddress(os.environ["WZXY_LOCATION"])
+        self.sign_data = sign_data
         data = urlencode(sign_data)
         self.session = requests.session()
         response = self.session.post(url=url, data=data, headers=self.header)
         response = json.loads(response.text)
-        # 打卡情况        
+        # 打卡情况
         # 如果 jwsession 无效，则重新 登录 + 打卡
-        if response['code'] == -10:
+        if response["code"] == -10:
             print(response)
-            print('jwsession 无效，将尝试使用账号信息重新登录')
+            print("jwsession 无效，将尝试使用账号信息重新登录")
             self.status_code = 4
             loginStatus = self.login()
             if loginStatus:
@@ -124,7 +147,7 @@ class WoZaiXiaoYuanPuncher:
         elif response["code"] == 0:
             self.status_code = 1
             print("打卡成功")
-        elif response['code'] == 1:
+        elif response["code"] == 1:
             print(response)
             print("打卡失败：今日健康打卡已结束")
             self.status_code = 3
