@@ -105,10 +105,8 @@ class WoZaiXiaoYuanPuncher:
             "province": _res['province'],
             "township": _res['township'],
             "street": _res['streetNumber']['street'],
-            "citycode": os.environ['WZXY_CITYCODE'],
-            "towncode": os.environ['WZXY_TOWNCODE'],
-            //"towncode": "0",
-            //"citycode": "0",暂时保留，待代码完善后补充
+            "towncode": "0",
+            "citycode": "0",
             "areacode": _res['adcode'],
             "timestampHeader":int(round(time.time() * 1000)),
             "signatureHeader": hashlib.sha256(
